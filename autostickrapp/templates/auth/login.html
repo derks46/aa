@@ -1,0 +1,31 @@
+{% extends 'autostickrapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="login-page"  style="color: black;">
+  <div class="form">
+    <form class="login-form" method="post">
+    	{% csrf_token %}
+
+			{% if form.non_field_errors %}
+			<div class="form_group" >
+				{{ form.non_field_errors }}
+			</div>
+			{% endif %}
+
+			{% for field in form.visible_fields %}
+			<div class="form_group" >
+				{{ field.label_tag }}
+				{{ field }}
+				{{ field.errors }}
+				<div class="helpText">{{ field.help_text|safe }}</div>
+			</div>
+			{% endfor %}
+      <button type="submit">Iniciar sesion</button>
+      <p class="message">¿Aun no tienes una cuenta? <a href="/usuario/nuevo">Crear una cuenta</a></p>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'autostickrapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div style="background-color: #e6f7ff; " id="contact">
+<h1 style="padding-left: 2%;">Contactanos</h2>
+	<div class="w3-section" style="margin: 2%">
+      <p><i class="fa fa-phone fa-fw w3-text-black w3-xxlarge w3-margin-right"></i> Telefono de contacto: 4921308191</p>
+    </div><br>
+    <div class="form" style="color: black;">
+    <p style="padding-left: 2%">Mandanos un mensaje:</p>
+      <form method="post">
+      	{% if form.non_field_errors %}
+            <div class="form_group" >
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            {% for field in form.visible_fields %}
+            <div class="form_group" >
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+    <br>
+        <button type="submit" >Enviar mensaje</button>
+    </form>
+    </div><br>
+</div>
+
+
+{% endblock %}
+

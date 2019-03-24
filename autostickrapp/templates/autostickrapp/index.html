@@ -1,0 +1,91 @@
+{% extends 'autostickrapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <img src="{% static 'img/carr1.jpg' %}" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+  <img src="{% static 'img/carr2.jpg' %}" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+  <img src="{% static 'img/carr3.jpg' %}" style="width:100%">
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span>  
+  <span class="dot"></span> 
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
+}
+</script>
+<!-- Catalogo seccion -->
+
+<div style="background-color: #e6f7ff; margin-bottom: 7%;" id="catalogo" class="container-fluid text-center">
+  <h1 style="padding-left: 2%;">Catalógo de marcas</h1>
+<table style="color: black;">
+  <tr>
+    <th>Marca</th>
+    <th>Logo</th>
+  </tr>
+  {% for post in marcas %}
+  
+  <tr class="tabla" onclick="window.location='{% url "detalle_marca" pk=post.nombre %}';">
+  	<td>{{ post.nombre }}</td>
+  	<td><img src="{{ post.logo.url }}" width="10%" align="right" class="logos"></td>
+  </tr>
+  
+  {% endfor %}
+</table>
+</div>
+<!-- Acerca de seccion -->
+<div style="background-color: #e6f7ff;" id="info">
+<h1 style="padding-left: 2%;">¿Quiénes Somos?</h2>
+	<div style="margin: 1%; background-color: #cce6ff; padding: 1%;">
+	<h3>Misión</h3>
+	<p>La empresa Comaya es una empresa de comercialización, especializada en soluciones y servicios para el mercado automotriz, con amplia experiencia y cobertura en la región, que brinda un servicio profesional  de excelencia a nuestros clientes, respetando el medioambiente y a la comunidad.</p><br></div>
+	<div style="margin: 1%; background-color: #cce6ff; padding: 1%;">
+	<h3>Visión</h3>
+	<p>Ser una empresa líder en soluciones y servicios innovadores para el mercado automotriz, con crecimiento rentable  y sustentable, apegada a valores y beneficios
+éticos, a fin de lograr éxito permanente en escenario de alto reto y constante evolución.</p><br></div>
+<div style="margin: 1%; background-color: #cce6ff; padding: 1%;">
+	<h3>Valores</h3>
+	<p>Integridad: Trato con dignidad y respeto entre compañeros.
+Honestidad: Actuación congruente y hablar con la verdad
+Innovación: Satisfacer y superar las expectativas del cliente con servicios de calidad y distinción
+Trabajo en equipo: Actuar solidario, responsables y unidos por objetivos comunes.
+</p></div><br>
+</div>
+
+
+
+{% endblock %}
+

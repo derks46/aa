@@ -1,0 +1,432 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<title>Autostickr</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Palatino">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<style>
+body {
+  font-family: font-family:'Palatino Linotype', 'Book Antiqua', Palatino, serif;color: black;
+} 
+h1,h2,h3,h4,h5,h6,p {font-family:'Palatino Linotype', 'Book Antiqua', Palatino, serif; color: black;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 50%;
+  max-width: 400px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #808080;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url("{% static 'img/load.gif' %}") 50% 50% rgb(254, 254, 254);
+    background-repeat: no-repeat;
+}
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@media screen and (min-width:300px) and (max-width:800px) {
+.logos{
+  width: 30%;
+  transition: transform .2s;
+}
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #80bfff;
+}
+
+.tabla:hover{
+  cursor:pointer; 
+  cursor: hand;
+  background-color: #ccefff;
+}
+
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.fieldWrapper  {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #ffffff;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: -100%;
+}
+.form input  {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #ccefff;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #000000;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #ccefff;
+}
+
+td button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #ccefff;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #000000;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+td button:hover,.form button:active,.form button:focus {
+  background: #ccefff;
+}
+
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4dc6ff;
+  text-decoration: none;
+}
+.form textarea{
+  width: 100%;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+</style>
+<body class="w3-black">
+  <script type="text/javascript">
+    setTimeout(function() { 
+    $('.loader').fadeOut('fast'); 
+}, 5000);
+</script>
+<div class="loader"></div>
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <br>
+  <img src="{% static 'img/autostickr.png' %}" style="width:100%;margin-bottom: 20%">
+  {% if user.is_authenticated %}
+  <a href="/usuario" class="w3-bar-item w3-button w3-hover-white" style="margin-top: -20%;margin-bottom: -10%">
+    <p>Usuario actual:</p>
+    <p>{{user.username}}</p>
+  </a>
+  {% endif %}
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-white" style="margin-bottom: -10%">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="/#catalogo" class="w3-bar-item w3-button w3-padding-large w3-hover-white"style="margin-bottom: -10%">
+    <i class="fa fa-money w3-xxlarge"></i>
+    <p>CATÁLOGO</p>
+  </a>
+    <a href="/#info" class="w3-bar-item w3-button w3-padding-large w3-hover-white"style="margin-bottom: -10%">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>¿QUIÉNES SOMOS?</p>
+  </a>
+  {% if user.is_authenticated %}
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-white"style="margin-bottom: -10%">
+    <i class="fa fa-shopping-cart w3-xxlarge"></i>
+    <p>CARRITO</p>
+  </a>
+  {% else %}
+  <a href="/login" class="w3-bar-item w3-button w3-padding-large w3-hover-white"style="margin-bottom: -10%">
+    <i class="fa fa-user-circle w3-xxlarge"></i>
+    <p>INICIAR SESION</p>
+  </a>
+  {% endif %}
+  <a href="/email" class="w3-bar-item w3-button w3-padding-large w3-hover-white"style="margin-bottom: -10%">
+    <i class="fa fa-phone w3-xxlarge"></i>
+    <p style="margin-left: -15%;">CONTACTANOS</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<!--
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important; margin: 1%"><i class="fa fa-home w3-xxlarge"></i></a>
+    <a href="#catalogo" class="w3-bar-item w3-button" style="width:25% !important; margin: 1%"><i class="fa fa-money w3-xxlarge"></i></a>
+    <a href="#info" class="w3-bar-item w3-button" style="width:25% !important; margin: 1%"><i class="fa fa-user w3-xxlarge"></i></a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important; margin: 1%"><i class="fa fa-shopping-cart w3-xxlarge"></i></a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important; margin: 1%"><i class="fa fa-phone w3-xxlarge"></i></a>
+  </div>
+</div> -->
+<nav class="navbar navbar-inverse w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="container-fluid w3-small" style="margin: 20px">
+    <a href="/"><i class="fa fa-home w3-xxlarge" style="padding-left: 20px"></i></a>
+      <a href="/#catalogo" ><i class="fa fa-money w3-xxlarge"></i></a>
+      <a href="/#info"><i class="fa fa-user w3-xxlarge"></i></a>
+      {% if user.is_authenticated %}
+      <a href="#"><i class="fa fa-shopping-cart w3-xxlarge"></i></a>
+      {% else %}
+      <a href="/login"><i class="fa fa-user-circle w3-xxlarge"></i></a>
+      {% endif %}
+      <a href="/email"><i class="fa fa-phone w3-xxlarge"></i></a>
+  </div>
+</nav>
+
+<!-- Page Content -->
+
+<div class="w3-padding-large" id="main" style="background-color: #ffffff;">
+  <!-- Header/Home -->
+{% block content %}
+{% endblock %}
+  
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>

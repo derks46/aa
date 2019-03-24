@@ -1,0 +1,68 @@
+{% extends 'autostickrapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+
+<div style="background-color: #e6f7ff; margin-bottom: 7%;" id="catalogo" class="container-fluid text-center">
+  <h1 style="padding-left: 2%;">Catalógo de modelos</h1>
+<table style="color: black;">
+  <tr>
+    <th>Precio</th>
+    <th>Modelo</th>
+    <th></th>
+    <th>Cantidad</th>
+    <th>Descripcion</th>
+    <th>Imagen</th>
+  </tr>
+  {% for post in post %}
+  
+  <tr >
+    <td>{{ post.precio }}</td>
+    <td>{{ post.modelo }}</td>
+    <form action="{% url 'cart:cart_add' post.pk %}" method="post" class="form">
+                                {% csrf_token %}
+                                
+                               <td> <button type="submit" >Añadir al carrito</td>
+                               <td>{{ cart_product_form.quantity }}</td>
+                            </form>
+    <td>{{ post.descripcion }}</td>
+    <td><img data-toggle="modal" data-target="#exampleModal" src="{{post.imagen.url}}" class="logos" width="12%" align="right" id="{{post.modelo}}" style="border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s; hover {opacity: 0.7;}"></td>
+  </tr>
+  <script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
+  {% endfor %}
+  <!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+</table>
+</div>
+
+
+{% endblock %}
+

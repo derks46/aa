@@ -1,0 +1,26 @@
+{% extends 'autostickrapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+
+
+<div class="login-page"  style="color: black;">
+  <div class="form">
+    <form class="login-form" method="post">
+
+			<div class="form_group" >
+				<h5>Nombre de usuario:</h5>
+				<h5 style="background-color: #f2f2f2">{{user.username}}</h5>
+				<h5>Nombre completo:</h5>
+				<h5 style="background-color: #f2f2f2">{{user.get_full_name}}</h5>
+				<h5>Email:</h5>
+				<h5 style="background-color: #f2f2f2">{{user.email}}</h5>
+			</div>
+      <p><a href="/logout">Cerrar sesion</a></p>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
